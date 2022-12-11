@@ -1,0 +1,64 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "EasyKafka",
+	"Description": "EasyKafka is a kafka client sub-system that supports Kafka & Red Panda message brokers.",
+	"Category": "Other",
+	"CreatedBy": "Dynamic Servers Systems",
+	"CreatedByURL": "https://github.com/sha3sha3/UE-EasyKafka",
+	"DocsURL": "https://github.com/sha3sha3/UE-EasyKafka/blob/master/README.md",
+	"MarketplaceURL": "",
+	"SupportURL": "https://discord.com/invite/MtGpAdM",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "EasyKafka",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux",
+				"LinuxArm64"
+			],
+			"WhitelistPlatforms": [
+				"Win64",
+				"Linux",
+				"LinuxAArch64"
+			]
+		},
+		{
+			"Name": "KafkaConsumer",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux",
+				"LinuxArm64"
+			],
+			"WhitelistPlatforms": [
+				"Win64",
+				"Linux",
+				"LinuxAArch64"
+			]
+		},
+		{
+			"Name": "KafkaProducer",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux",
+				"LinuxArm64"
+			],
+			"WhitelistPlatforms": [
+				"Win64",
+				"Linux",
+				"LinuxAArch64"
+			]
+		}
+	]
+}
