@@ -162,6 +162,10 @@ EasyKafka->GetProducer()->ProduceRecord(record);
 
 <img src="Images/ProducerBP.png" alt="ProducerBP">
 
+## Find it helpful?
+
+Give us a ⭐️!
+
 # License
 
 Licensed under BSD 2-Clause [License](LICENSE.txt).
