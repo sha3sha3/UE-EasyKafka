@@ -4,10 +4,10 @@
 
 #include "Modules/ModuleManager.h"
 #include "CoreMinimal.h"
-#include "Core.h"
 #include "KafkaConsumerConfig.h"
 #include "Templates/SharedPointer.h"
 #include <string>
+#include "HAL/Runnable.h"
 #include "ConsumerRecord.h"
 #include "ConsumerCallback.h"
 THIRD_PARTY_INCLUDES_START

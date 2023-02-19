@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "Subsystems/GameInstanceSubsystem.h"
+#include "Subsystems/EngineSubsystem.h"
 #include "Templates/SharedPointer.h"
 #include "ConsumerCallback.h"
 #include "ConsumerRecord.h"

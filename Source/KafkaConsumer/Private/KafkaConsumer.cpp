@@ -1,6 +1,7 @@
 // Copyright (c) 2022-2023 MrShaaban, Mohamad Shaaban, https://github.com/sha3sha3/UE-EasyKafka.
 
 #include "KafkaConsumer.h"
+#include "HAL/RunnableThread.h"
 
 
 

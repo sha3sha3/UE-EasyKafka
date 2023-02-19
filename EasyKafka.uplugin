@@ -8,7 +8,7 @@
 	"CreatedBy": "Dynamic Servers Systems",
 	"CreatedByURL": "https://github.com/sha3sha3/UE-EasyKafka",
 	"DocsURL": "https://github.com/sha3sha3/UE-EasyKafka/blob/master/README.md",
-	"MarketplaceURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/dd21b4941fdb4650aae4189429fedffe",
 	"SupportURL": "https://discord.com/invite/MtGpAdM",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
