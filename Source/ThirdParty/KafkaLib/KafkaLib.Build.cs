@@ -14,33 +14,20 @@ using System.IO;
 		string librdkafka = Path.Combine(ModuleDirectory, "bin");
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			string LibPath = Path.Combine(ModuleDirectory, "lib");
-			PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka.lib"));
-			PublicAdditionalLibraries.Add(Path.Combine(LibPath, "lz4.lib"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/rdkafka.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/legacy.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/libcrypto-3-x64.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/libssl-3-x64.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/zlib1.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/zstd.dll"));
-			PublicDelayLoadDLLs.Add(Path.Combine(librdkafka, "Win64/lz4.dll"));
+			string LibPath = Path.Combine(ModuleDirectory, "lib/Win64");
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "lz4.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka++.lib"));
 
-			RuntimeDependencies.Add("$(TargetOutputDir)/rdkafka.dll", Path.Combine(librdkafka, "Win64/rdkafka.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/lz4.dll", Path.Combine(librdkafka, "Win64/lz4.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/legacy.dll", Path.Combine(librdkafka, "Win64/legacy.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libcrypto-3-x64.dll", Path.Combine(librdkafka, "Win64/libcrypto-3-x64.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libssl-3-x64.dll", Path.Combine(librdkafka, "Win64/libssl-3-x64.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/zlib1.dll", Path.Combine(librdkafka, "Win64/zlib1.dll"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/zstd.dll", Path.Combine(librdkafka, "Win64/zstd.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/rdkafka.dll", Path.Combine(librdkafka, "Win64/rdkafka.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/lz4.dll", Path.Combine(librdkafka, "Win64/lz4.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/legacy.dll", Path.Combine(librdkafka, "Win64/legacy.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/libcrypto-3-x64.dll", Path.Combine(librdkafka, "Win64/libcrypto-3-x64.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/libssl-3-x64.dll", Path.Combine(librdkafka, "Win64/libssl-3-x64.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/zlib1.dll", Path.Combine(librdkafka, "Win64/zlib1.dll"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Win64/zstd.dll", Path.Combine(librdkafka, "Win64/zstd.dll"));
+            PublicDependencyModuleNames.AddRange(
+            new string[]
+            {
+                "OpenSSL",
+                "zlib"
+            }
+            );
 
-		}
+        }
 		else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
 			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/librdkafka.so"));
@@ -101,8 +88,6 @@ using System.IO;
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"SSL",
-				"OpenSSL",
 				"Core"
 			}
 			);
