@@ -13,22 +13,22 @@ void UEasyKafkaSubsystem::Deinitialize()
 		EasyKafka->GetConsumer()->StopConsuming();//kill the thread
 }
 
-void UEasyKafkaSubsystem::CreateConsumerDefault(FString Servers, FString UserName, FString Password)
+void UEasyKafkaSubsystem::CreateConsumerDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel)
 {
 	if(EasyKafka->GetConsumer())
-	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, TMap<FString,FString>());
+	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, TMap<FString,FString>(), (int)KafkaLogLevel);
 }
 
-void UEasyKafkaSubsystem::CreateConsumer(FString Servers, FString UserName, FString Password, TMap<EKafkaConsumerConfig, FString> Configuration)
+void UEasyKafkaSubsystem::CreateConsumer(FString Servers, FString UserName, FString Password, TMap<EKafkaConsumerConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
 {
 	if(EasyKafka->GetConsumer())
-	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration);
+	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration, (int)KafkaLogLevel);
 }
 
-void UEasyKafkaSubsystem::CreateConsumerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration)
+void UEasyKafkaSubsystem::CreateConsumerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
 {
 	if(EasyKafka->GetConsumer())
-	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration);
+	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration, (int)KafkaLogLevel);
 }
 
 void UEasyKafkaSubsystem::Subscribe(TArray<FString> Topics, int Timeout)
@@ -112,22 +112,22 @@ void UEasyKafkaSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 
 
-void UEasyKafkaSubsystem::CreateProducerDefault(FString Servers, FString UserName, FString Password)
+void UEasyKafkaSubsystem::CreateProducerDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel)
 {
 	if (EasyKafka->GetProducer())
-		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password, TMap<FString, FString>(), true);
+		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password, TMap<FString, FString>(), true, (int)KafkaLogLevel);
 }
 
-void UEasyKafkaSubsystem::CreateProducerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration)
+void UEasyKafkaSubsystem::CreateProducerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
 {
 	if (EasyKafka->GetProducer())
-		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password,Configuration,true);
+		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password,Configuration,true, (int)KafkaLogLevel);
 }
 
-void UEasyKafkaSubsystem::CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration)
+void UEasyKafkaSubsystem::CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
 {
 	if (EasyKafka->GetProducer())
-		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password, Configuration, true);
+		EasyKafka->GetProducer()->CreateProducer(Servers, UserName, Password, Configuration, true, (int)KafkaLogLevel);
 }
 
 void UEasyKafkaSubsystem::ProduceRecord(FString Topic, FString Value, int64 Id)

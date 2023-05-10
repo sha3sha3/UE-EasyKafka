@@ -156,7 +156,7 @@ const FString FKafkaConsumerModule::GetKafkaConfigString(EKafkaConsumerConfig Ka
 
 
 
-void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<EKafkaConsumerConfig, FString>& Configuration)
+void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<EKafkaConsumerConfig, FString>& Configuration, int KafkaLogLevel)
 {
 	TMap<FString, FString> Configurations;
 
@@ -165,10 +165,10 @@ void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FSt
 		Configurations.Add(FKafkaConsumerModule::GetKafkaConfigString(pair.Key), pair.Value);
 	}
 
-	FKafkaConsumerModule::CreateConsumer(Servers, UserName, Password, Configurations);
+	FKafkaConsumerModule::CreateConsumer(Servers, UserName, Password, Configurations, KafkaLogLevel);
 }
 
-void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<FString, FString>& Configuration)
+void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<FString, FString>& Configuration, int KafkaLogLevel)
 {
 	
 	/*
@@ -187,7 +187,8 @@ void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FSt
 
 	KafkaConsumerProps = new kafka::Properties({
 		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))},
-		   {"enable.auto.commit", {"true"}}
+		   {"enable.auto.commit", {"true"}},
+		   {"log_level",  std::to_string(KafkaLogLevel)}
 		});
 	/*
 	Create producer/consumer with no usr/passwd

@@ -46,7 +46,7 @@ FKafkaProducerModule& FKafkaProducerModule::Get()
 	return *ProducerSingleton;
 }
 
-void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, bool bAutoEventPool)
+void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, bool bAutoEventPool, int KafkaLogLevel)
 {
 	TMap<FString, FString> Configurations;
 
@@ -55,10 +55,10 @@ void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FSt
 		Configurations.Add(GetKafkaConfigString(pair.Key), pair.Value);
 	}
 
-	CreateProducer(Servers, UserName, Password, Configurations, bAutoEventPool);
+	CreateProducer(Servers, UserName, Password, Configurations, bAutoEventPool, KafkaLogLevel);
 }
 
-void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, bool bAutoEventPool)
+void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, bool bAutoEventPool, int KafkaLogLevel)
 {
 	if (KafkaProducerProps)
 		delete KafkaProducerProps;
@@ -69,7 +69,8 @@ void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FSt
 	}
 
 	KafkaProducerProps = new kafka::Properties({
-		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))}
+		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))},
+		   {"log_level",  std::to_string(KafkaLogLevel)}
 		});
 	/*
 	Create producer/consumer with no usr/passwd

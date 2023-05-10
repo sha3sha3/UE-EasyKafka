@@ -98,9 +98,10 @@ public:
 	* @param UserName authorization user/key.
 	* @param Password authorization password.
 	* @param Configuration List of EKafkaConsumerConfig,String map.
+	* @param KafkaLogLevel Int 7 to 0
 	* @warning Call it once only.
 	*/
-	void CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<EKafkaConsumerConfig, FString>& Configuration);
+	void CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<EKafkaConsumerConfig, FString>& Configuration, int KafkaLogLevel=5);
 
 	/**
 	* Create a kafka Consumer.
@@ -109,9 +110,10 @@ public:
 	* @param UserName authorization user/key.
 	* @param Password authorization password.
 	* @param Configuration List of String,String map.
+	* @param KafkaLogLevel Int 7 to 0
 	* @warning Call it once only.
 	*/
-	void CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<FString, FString>& Configuration = {});
+	void CreateConsumer(FString Servers, FString UserName, FString Password, const TMap<FString, FString>& Configuration = {}, int KafkaLogLevel=5);
 
 	/**
 	* Subscribe to topics.

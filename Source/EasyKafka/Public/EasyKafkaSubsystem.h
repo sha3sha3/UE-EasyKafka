@@ -11,6 +11,7 @@
 #include "ProducerCallback.h"
 #include "KafkaProducerConfig.h"
 #include "ProducerRecord.h"
+#include "KafkaLogLevel.h"
 #include "EasyKafkaSubsystem.generated.h"
 
 
@@ -35,11 +36,11 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNewMessage,const TArray<FConsumerRecord>&, Messages);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Cunsumer", ToolTip = "Create a kafka Consumer. Call it once.", Keywords = "EasyKafka sample test testing"), Category = "EasyKafka|Consumer")
-		 void CreateConsumerDefault(FString Servers, FString UserName, FString Password);
+		 void CreateConsumerDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Cunsumer", ToolTip = "Create a kafka Consumer. Call it once.", Keywords = "EasyKafka sample test testing"), Category = "EasyKafka|Consumer")
-		 void CreateConsumer(FString Servers, FString UserName, FString Password, TMap<EKafkaConsumerConfig, FString> Configuration);
+		 void CreateConsumer(FString Servers, FString UserName, FString Password, TMap<EKafkaConsumerConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Cunsumer", ToolTip = "Create a kafka Consumer. Call it once.", Keywords = "EasyKafka sample test testing"), Category = "EasyKafka|Consumer")
-		 void CreateConsumerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration);
+		 void CreateConsumerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Subscribe", ToolTip = "Subscribe to topics", Keywords = "EasyKafka sample test testing"), Category = "EasyKafka|Consumer")
 		 void Subscribe(TArray<FString> Topics, int Timeout=1000 );
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Unsubscribe", ToolTip ="Unsubscribe from all topics.", Keywords = "EasyKafka sample test testing"), Category = "EasyKafka|Consumer")
@@ -74,11 +75,11 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProduce, const FProducerCallback&, ProduceCallback);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Producer", ToolTip = "Create a kafka producer. Call once!", Keywords = ""), Category = "EasyKafka|Producer")
-		void CreateProducerDefault(FString Servers, FString UserName, FString Password);
+		void CreateProducerDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Producer", ToolTip = "Create a kafka producer. Call once!", Keywords = ""), Category = "EasyKafka|Producer")
-		void CreateProducerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration);
+		void CreateProducerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Producer", ToolTip = "Create a kafka producer. Call once!", Keywords = ""), Category = "EasyKafka|Producer")
-		void CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration);
+		void CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Produce Record", ToolTip = "Produce Single record", Keywords = ""), Category = "EasyKafka|Producer")
 		void ProduceRecord(FString Topic, FString Value, int64 Id = -1);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Produce Records", ToolTip = "Produce multiple records.", Keywords = ""), Category = "EasyKafka|Producer")

@@ -40,9 +40,10 @@ public:
 	* @param Password authorization password.
 	* @param Configuration List of EKafkaProducerConfig,String map.
 	* @param bAutoEventPool=true create thread that porcess events on the BG.
+	* @param KafkaLogLevel Int 7 to 0
 	* @warning Call it once only.
     */
-	void CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, bool bAutoEventPool = true);
+	void CreateProducer(FString Servers, FString UserName, FString Password, TMap<EKafkaProducerConfig, FString> Configuration, bool bAutoEventPool = true, int KafkaLogLevel =5);
 
 	/**
 	* Create a kafka producer.
@@ -51,9 +52,10 @@ public:
 	* @param UserName authorization user/key.
 	* @param Password authorization password.
 	* @param Configuration List of String,String map.
+	* @param KafkaLogLevel Int 7 to 0
 	* @param bAutoEventPool=true create thread that porcess events on the BG.
 	*/
-	void CreateProducer(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration = {}, bool bAutoEventPool = true);
+	void CreateProducer(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration = {}, bool bAutoEventPool = true, int KafkaLogLevel = 5);
 
 	/**
 	* Produce Single record.
