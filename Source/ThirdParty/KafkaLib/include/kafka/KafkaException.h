@@ -14,7 +14,7 @@
 #include <exception>
 #include <string>
 
-#define ENABLE_EXCEPTIONS 0
+#define ENABLE_UE_EXCEPTIONS_LOGS 0
 
 namespace KAFKA_API {
 
@@ -26,7 +26,7 @@ DEFINE_LOG_CATEGORY_STATIC(LogCPPKafka, Log, All);
 class KafkaException: public std::exception
 {
 public:
-    FString shit;
+
     KafkaException(const char* filename, std::size_t lineno, const Error& error)
         : _when(std::chrono::system_clock::now()),
           _filename(filename),
@@ -60,7 +60,7 @@ private:
 
 #define KAFKA_THROW_ERROR(error) \
 {\
-if(ENABLE_EXCEPTIONS) throw KafkaException(__FILE__, __LINE__, error);\
+if(ENABLE_UE_EXCEPTIONS_LOGS) throw KafkaException(__FILE__, __LINE__, error);\
 else\
 {\
 auto errorStr = UTF8_TO_TCHAR(std::move(error).toString().c_str());\
