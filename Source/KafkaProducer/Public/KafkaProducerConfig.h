@@ -24,5 +24,7 @@ enum class EKafkaProducerConfig : uint8
 	TRANSACTION_TIMEOUT_MS UMETA(ToolTip = "Th maximus amount of time in milliseconds that the transaction coordinator will wait for a trnsaction status update from the producer before proactively ablrting the ongoing transaction."),
 	SECURITY_PROTOCOL UMETA(ToolTip = "Protocol used to communicate with brokers."),
 	SASL_KERBEROS_KINIT_CMD UMETA(ToolTip = "Shell command to refresh or acquire the client's Kerberos ticket."),
-	SASL_KERBEROS_SERVICE_NAME UMETA(ToolTip = " The client's Kerberos principal name.")
+	SASL_KERBEROS_SERVICE_NAME UMETA(ToolTip = " The client's Kerberos principal name."),
+	ENABLE_SSL_CERTIFICATE_VERIFICATION UMETA(ToolTip = " Enable SSL certificate verification of the broker."),
+	LOG_LEVEL UMETA(ToolTip = " Rdkafka log level.")
 };

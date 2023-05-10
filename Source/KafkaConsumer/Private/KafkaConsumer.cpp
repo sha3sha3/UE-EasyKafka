@@ -145,6 +145,10 @@ const FString FKafkaConsumerModule::GetKafkaConfigString(EKafkaConsumerConfig Ka
 		return "sasl.kerberos.kinit.cmd";
 	case	EKafkaConsumerConfig::SASL_KERBEROS_SERVICE_NAME:
 		return "sasl.kerberos.service.name";
+	case    EKafkaConsumerConfig::ENABLE_SSL_CERTIFICATE_VERIFICATION:
+		return "enable.ssl.certificate.verification";
+	case    EKafkaConsumerConfig::LOG_LEVEL:
+		return "log_level";
 	default:
 		return "";
 	}
