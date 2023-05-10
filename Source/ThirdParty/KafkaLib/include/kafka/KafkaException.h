@@ -21,7 +21,7 @@ namespace KAFKA_API {
 /**
  * Specific exception for Kafka clients.
  */
-DEFINE_LOG_CATEGORY_STATIC(LogCPPKafka, Log, All);
+DEFINE_LOG_CATEGORY_STATIC(LogKafkaException, Log, All);
 
 class KafkaException: public std::exception
 {
@@ -65,7 +65,7 @@ else\
 {\
 auto errorStr = UTF8_TO_TCHAR(std::move(error).toString().c_str());\
 TSharedPtr<FString> errorStrPtr=MakeShared<FString>(errorStr);\
-UE_LOG(LogCPPKafka,Error,TEXT("%s"),errorStr);\
+UE_LOG(LogKafkaException,Error,TEXT("LogKafkaException: %s"),errorStr);\
 }\
 }
 #define KAFKA_THROW_IF_WITH_ERROR(error)  if (error) KAFKA_THROW_ERROR(error)
