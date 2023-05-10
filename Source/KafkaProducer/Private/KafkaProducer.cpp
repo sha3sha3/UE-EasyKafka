@@ -69,13 +69,19 @@ void FKafkaProducerModule::CreateProducer(FString Servers, FString UserName, FSt
 	}
 
 	KafkaProducerProps = new kafka::Properties({
-		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))},
-		   {"enable.auto.commit", "true"},
-		   {"security.protocol","SASL_SSL"},
-		   {"sasl.mechanisms","PLAIN"},
-		   {"sasl.username", std::string(TCHAR_TO_UTF8(*UserName))},
-		   {"sasl.password", std::string(TCHAR_TO_UTF8(*Password)) }
+		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))}
 		});
+	/*
+	Create producer/consumer with no usr/passwd
+	*/
+	if (!UserName.Equals("") && !Password.Equals(""))
+	{
+		KafkaProducerProps->put("security.protocol", "SASL_SSL");
+		KafkaProducerProps->put("sasl.mechanisms", "PLAIN");
+		KafkaProducerProps->put("sasl.username", std::string(TCHAR_TO_UTF8(*UserName)));
+		KafkaProducerProps->put("sasl.password", std::string(TCHAR_TO_UTF8(*Password)));
+	}
+
 	for (const TPair<FString, FString>& pair : Configuration)
 	{
 		KafkaProducerProps->put(std::string(TCHAR_TO_UTF8(*pair.Key)), std::string(TCHAR_TO_UTF8(*pair.Value)));

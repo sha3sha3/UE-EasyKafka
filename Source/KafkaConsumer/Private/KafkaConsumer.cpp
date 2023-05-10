@@ -183,12 +183,19 @@ void FKafkaConsumerModule::CreateConsumer(FString Servers, FString UserName, FSt
 
 	KafkaConsumerProps = new kafka::Properties({
 		   {"bootstrap.servers",  std::string(TCHAR_TO_UTF8(*Servers))},
-		   {"enable.auto.commit", "true"},
-		   {"security.protocol","SASL_SSL"},
-		   {"sasl.mechanisms","PLAIN"},
-		   {"sasl.username", std::string(TCHAR_TO_UTF8(*UserName))},
-		   {"sasl.password", std::string(TCHAR_TO_UTF8(*Password)) }
+		   {"enable.auto.commit", {"true"}}
 		});
+	/*
+	Create producer/consumer with no usr/passwd
+	*/
+	if (!UserName.Equals("") && !Password.Equals(""))
+	{
+		KafkaConsumerProps->put("security.protocol", "SASL_SSL");
+		KafkaConsumerProps->put("sasl.mechanisms", "PLAIN");
+		KafkaConsumerProps->put("enable.ssl.certificate.verification", "false");
+		KafkaConsumerProps->put("sasl.username", std::string(TCHAR_TO_UTF8(*UserName)));
+		KafkaConsumerProps->put("sasl.password", std::string(TCHAR_TO_UTF8(*Password)));
+	}
 
 	for (const TPair<FString, FString>& pair : Configuration)
 	{
