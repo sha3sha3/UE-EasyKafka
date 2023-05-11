@@ -28,7 +28,31 @@ using System.IO;
             );
 
         }
-		else if (Target.Platform == UnrealTargetPlatform.Linux)
+        else if (Target.Platform == UnrealTargetPlatform.HoloLens)
+        {
+            string LibPath = Path.Combine(ModuleDirectory, "lib/WinArm64");
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka++.lib"));
+			/*
+			 Later on OpenSSL libs for WinArm64 will be moved to a separate module
+			 */
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "libcrypto.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "libssl.lib"));
+            /*
+			 Windows Kits libs
+			 */
+            PublicAdditionalLibraries.Add(Path.Combine(Target.WindowsPlatform.WindowsSdkDir, "Lib", Target.WindowsPlatform.WindowsSdkVersion, "um/arm64", "kernel32.Lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(Target.WindowsPlatform.WindowsSdkDir, "Lib", Target.WindowsPlatform.WindowsSdkVersion, "um/arm64", "Secur32.Lib"));
+
+            PublicDependencyModuleNames.AddRange(
+            new string[]
+            {
+                "zlib"
+            }
+            );
+
+        }
+        else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
 			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/librdkafka.so"));
 			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/liblz4.so"));

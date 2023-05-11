@@ -19,6 +19,9 @@
 #include <mutex>
 #include <unordered_map>
 
+#ifdef max
+#undef max
+#endif
 
 namespace KAFKA_API { namespace clients {
 

@@ -12,6 +12,10 @@
 
 #define ENABLE_UE_LOGS 1
 
+#ifndef min
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
+
 namespace KAFKA_API {
 
 	DEFINE_LOG_CATEGORY_STATIC(LogKafka, Log, All);
@@ -34,8 +38,8 @@ namespace KAFKA_API {
 		{
 			static const std::vector<std::string> levelNames = { "EMERG", "ALERT", "CRIT", "ERR", "WARNING", "NOTICE", "INFO", "DEBUG", "INVALID" };
 			static const std::size_t              maxIndex = levelNames.size() - 1;
-
-			return levelNames[std::min(level, maxIndex)];
+			
+			return levelNames[min(level,maxIndex)];
 		}
 	};
 
@@ -60,7 +64,7 @@ namespace KAFKA_API {
 			auto cnt = std::snprintf(_wptr, capacity(), format, args...); // returns number of characters written if successful (not including '\0')
 			if (cnt > 0)
 			{
-				_wptr = std::min(_wptr + cnt, _buf.data() + MAX_CAPACITY - 1);
+				_wptr = min(_wptr + cnt, _buf.data() + MAX_CAPACITY - 1);
 			}
 			return *this;
 		}

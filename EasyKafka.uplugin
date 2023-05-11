@@ -22,12 +22,14 @@
 			"PlatformAllowList": [
 				"Win64",
 				"Linux",
-				"LinuxArm64"
+				"LinuxArm64",
+				"HoloLens"
 			],
 			"WhitelistPlatforms": [
 				"Win64",
 				"Linux",
-				"LinuxAArch64"
+				"LinuxAArch64",
+				"HoloLens"
 			]
 		},
 		{
@@ -37,12 +39,14 @@
 			"PlatformAllowList": [
 				"Win64",
 				"Linux",
-				"LinuxArm64"
+				"LinuxArm64",
+				"HoloLens"
 			],
 			"WhitelistPlatforms": [
 				"Win64",
 				"Linux",
-				"LinuxAArch64"
+				"LinuxAArch64",
+				"HoloLens"
 			]
 		},
 		{
@@ -52,12 +56,14 @@
 			"PlatformAllowList": [
 				"Win64",
 				"Linux",
-				"LinuxArm64"
+				"LinuxArm64",
+				"HoloLens"
 			],
 			"WhitelistPlatforms": [
 				"Win64",
 				"Linux",
-				"LinuxAArch64"
+				"LinuxAArch64",
+				"HoloLens"
 			]
 		}
 	]
