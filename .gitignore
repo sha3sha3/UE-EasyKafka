@@ -50,6 +50,7 @@ SourceArt/**/*.tga
 !Source/ThirdParty/**/bin/**/*.dll
 !Source/ThirdParty/**/lib/Win64/*.lib
 !Source/ThirdParty/**/lib/WinArm64/*.lib
+!Source/ThirdParty/**/lib/Linux64/*.a
 
 # Binary Files
 Binaries/*
