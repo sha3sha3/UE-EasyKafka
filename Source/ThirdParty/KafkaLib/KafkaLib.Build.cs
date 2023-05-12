@@ -11,7 +11,12 @@ using System.IO;
 		    CppStandard = CppStandardVersion.Cpp17;
 		    PublicSystemIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
 
-		string librdkafka = Path.Combine(ModuleDirectory, "bin");
+        /*
+		 rdkafka++.lib is not used but shipped in case of future updates
+		Only on Hololens we are using the bundled lz4
+		 */
+
+        string librdkafka = Path.Combine(ModuleDirectory, "bin");
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			string LibPath = Path.Combine(ModuleDirectory, "lib/Win64");
@@ -54,27 +59,20 @@ using System.IO;
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/librdkafka.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/liblz4.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/libcrypto.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/libssl.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/libz.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Linux64/libzstd.so"));
+            string LibPath = Path.Combine(ModuleDirectory, "lib/Linux64");
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "liblz4.a"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "librdkafka.a"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "librdkafka++.a"));
 
-			RuntimeDependencies.Add("$(TargetOutputDir)/librdkafka.so.1", Path.Combine(librdkafka, "Linux64/librdkafka.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/liblz4.so", Path.Combine(librdkafka, "Linux64/liblz4.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libcrypto.so.3", Path.Combine(librdkafka, "Linux64/libcrypto.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libssl.so.3", Path.Combine(librdkafka, "Linux64/libssl.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libz.so.1", Path.Combine(librdkafka, "Linux64/libz.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libzstd.so.1", Path.Combine(librdkafka, "Linux64/libzstd.so"));
 
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/librdkafka.so.1", Path.Combine(librdkafka, "Linux64/librdkafka.so"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/liblz4.so", Path.Combine(librdkafka, "Linux64/liblz4.so"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/libcrypto.so.3", Path.Combine(librdkafka, "Linux64/libcrypto.so"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/libssl.so.3", Path.Combine(librdkafka, "Linux64/libssl.so"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/libz.so.1", Path.Combine(librdkafka, "Linux64/libz.so"));
-			RuntimeDependencies.Add("$(PluginDir)/Binaries/Linux/libzstd.so.1", Path.Combine(librdkafka, "Linux64/libzstd.so"));
-		}
+            PublicDependencyModuleNames.AddRange(
+            new string[]
+            {
+                "OpenSSL",
+                "zlib"
+            }
+            );
+        }
 		#if UE_5_0_OR_LATER
 		else if(Target.Platform == UnrealTargetPlatform.LinuxArm64)
 		#else
