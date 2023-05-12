@@ -10,8 +10,9 @@ public class KafkaProducer : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp17;
+        PublicSystemIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 
-		PublicIncludePaths.AddRange(
+        PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
 				Path.Combine(PluginDirectory,"Source/KafkaProducer/Public")
@@ -45,6 +46,5 @@ public class KafkaProducer : ModuleRules
 			}
 			);
 		bEnableExceptions = true;
-		bUseRTTI = true;
 	}
 }

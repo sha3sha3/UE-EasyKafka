@@ -9,8 +9,9 @@ public class KafkaConsumer : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp17;
+        PublicSystemIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 
-		PublicIncludePaths.AddRange(
+        PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
 			}
@@ -43,6 +44,8 @@ public class KafkaConsumer : ModuleRules
 			}
 			);
 		bEnableExceptions = true;
-		bUseRTTI = true;
-	}
+
+        if (Target.Platform == UnrealTargetPlatform.HoloLens || Target.Platform == UnrealTargetPlatform.Win64)
+            bUseRTTI = true;//Avoid using RTTI on limux
+    }
 }

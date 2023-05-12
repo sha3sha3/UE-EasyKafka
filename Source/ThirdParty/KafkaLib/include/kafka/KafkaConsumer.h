@@ -965,7 +965,11 @@ inline void
 KafkaConsumer::rebalanceCallback(rd_kafka_t* rk, rd_kafka_resp_err_t err, rd_kafka_topic_partition_list_t* partitions, void* /* opaque */)
 {
     KafkaClient& client   = kafkaClient(rk);
-    auto&        consumer = dynamic_cast<KafkaConsumer&>(client);
+    #ifdef __linux__
+    auto& consumer = (KafkaConsumer&)client;
+    #else
+    auto& consumer = dynamic_cast<KafkaConsumer&>(client);
+    #endif
     consumer.onRebalance(err, partitions);
 }
 

@@ -2,6 +2,7 @@
 
 #include "KafkaProducer.h"
 #include "KafkaProducerConfig.h"
+#include <list>
 
 
 DEFINE_LOG_CATEGORY(LogKafkaProducer);

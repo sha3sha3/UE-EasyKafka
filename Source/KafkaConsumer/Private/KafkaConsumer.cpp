@@ -217,7 +217,7 @@ void FKafkaConsumerModule::Subscribe(const TArray<FString>& Topics, int TimeoutM
 
 	std::set<std::string> topics;
 
-	for (const auto topic : Topics)
+	for (const auto &topic : Topics)
 	{
 		UE_LOG(LogKafkaConsumer, Display, TEXT("Subscribing To:%s."),*topic);
 		topics.insert(std::string(TCHAR_TO_UTF8(*topic)));
@@ -296,7 +296,7 @@ const TArray<FString> FKafkaConsumerModule::GetSubscription() const
 		return TArray<FString>();
 
 	TArray<FString> Subscriptions;
-	for (const auto topic : Consumer->subscription())
+	for (const auto &topic : Consumer->subscription())
 	{
 		Subscriptions.Add(UTF8_TO_TCHAR(topic.c_str()));
 	}

@@ -48,6 +48,8 @@ public class EasyKafka : ModuleRules
 			}
 			);
 		bEnableExceptions = true;
-		bUseRTTI = true;
-	}
+
+		if(Target.Platform == UnrealTargetPlatform.HoloLens || Target.Platform == UnrealTargetPlatform.Win64)
+			bUseRTTI = true;//Avoid using RTTI on limux
+    }
 }
