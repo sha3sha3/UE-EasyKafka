@@ -38,11 +38,6 @@ using System.IO;
             string LibPath = Path.Combine(ModuleDirectory, "lib/WinArm64");
             PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka.lib"));
             PublicAdditionalLibraries.Add(Path.Combine(LibPath, "rdkafka++.lib"));
-			/*
-			 Later on OpenSSL libs for WinArm64 will be moved to a separate module
-			 */
-            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "libcrypto.lib"));
-            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "libssl.lib"));
             /*
 			 Windows Kits libs
 			 */
@@ -52,7 +47,8 @@ using System.IO;
             PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "zlib"
+                "zlib",
+                "OpenSSLens"//OpenSSL libs for WinArm64 https://github.com/sha3sha3/UE-OpenSSL-Hololens.git
             }
             );
 

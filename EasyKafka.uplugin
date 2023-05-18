@@ -66,5 +66,17 @@
 				"HoloLens"
 			]
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "OpenSSLens",
+			"Enabled": true,
+			"PlatformAllowList": [
+				"HoloLens"
+			],
+			"WhitelistPlatforms": [
+				"HoloLens"
+			]
+		}
 	]
 }
