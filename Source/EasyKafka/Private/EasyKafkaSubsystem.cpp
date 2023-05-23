@@ -2,7 +2,7 @@
 
 #include "EasyKafkaSubsystem.h"
 #include "KafkaConsumer.h"
-#include "kafkaProducer.h"
+#include "../../KafkaProducer/Public/KafkaProducer.h"
 
 
 

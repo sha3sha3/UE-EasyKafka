@@ -13,7 +13,7 @@ using System.IO;
 
         /*
 		 rdkafka++.lib is not used but shipped in case of future updates
-		Only on Hololens we are using the bundled lz4
+		Only on Arm64 we are using the bundled lz4
 		 */
 
         string librdkafka = Path.Combine(ModuleDirectory, "bin");
@@ -76,33 +76,19 @@ using System.IO;
 		#endif
 
 		{
-			#if UE_5_0_OR_LATER
-			string PluginBuildPath="$(PluginDir)/Binaries/LinuxArm64";
-			#else
-			string PluginBuildPath = "$(PluginDir)/Binaries/LinuxAArch64";
-			#endif
+            string LibPath = Path.Combine(ModuleDirectory, "lib/LinuxArm64");
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "librdkafka.a"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibPath, "librdkafka++.a"));
 
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/librdkafka.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/liblz4.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/libcrypto.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/libssl.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/libz.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(librdkafka, "Arm64/libzstd.so"));
 
-			RuntimeDependencies.Add("$(TargetOutputDir)/librdkafka.so.1", Path.Combine(librdkafka, "Arm64/librdkafka.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/liblz4.so", Path.Combine(librdkafka, "Arm64/liblz4.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libcrypto.so.3", Path.Combine(librdkafka, "Arm64/libcrypto.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libssl.so.3", Path.Combine(librdkafka, "Arm64/libssl.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libz.so.1", Path.Combine(librdkafka, "Arm64/libz.so"));
-			RuntimeDependencies.Add("$(TargetOutputDir)/libzstd.so.1", Path.Combine(librdkafka, "Arm64/libzstd.so"));
-
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "librdkafka.so.1"), Path.Combine(librdkafka, "Arm64/librdkafka.so"));
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "liblz4.so"), Path.Combine(librdkafka, "Arm64/liblz4.so"));
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "libcrypto.so.3"), Path.Combine(librdkafka, "Arm64/libcrypto.so"));
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "libssl.so.3"), Path.Combine(librdkafka, "Arm64/libssl.so"));
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "libz.so.1"), Path.Combine(librdkafka, "Arm64/libz.so"));
-			RuntimeDependencies.Add(String.Format("{0}/{1}", PluginBuildPath, "libzstd.so.1"), Path.Combine(librdkafka, "Arm64/libzstd.so"));
-		}
+            PublicDependencyModuleNames.AddRange(
+            new string[]
+            {
+                "OpenSSL",
+                "zlib"
+            }
+            );
+        }
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
