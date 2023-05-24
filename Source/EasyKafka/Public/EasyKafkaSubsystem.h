@@ -12,6 +12,8 @@
 #include "KafkaProducerConfig.h"
 #include "ProducerRecord.h"
 #include "KafkaLogLevel.h"
+#include "Containers/Map.h"
+#include "KafkaAdmin.h"
 #include "EasyKafkaSubsystem.generated.h"
 
 
@@ -94,6 +96,21 @@ public:
 		void PurgeMessages();
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "OnMessageProduced", ToolTip = "OnMessage produced callback.(failed/succeded)", Keywords = ""), Category = "EasyKafka|Producer")
 	FOnProduce OnMessageProduced;
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Admin Client", ToolTip = "Create a kafka Admin Client. Call it once.", Keywords = ""), Category = "EasyKafka|Admin")
+		void CreateAdminDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Admin Client", ToolTip = "Create a kafka Admin Client. Call it once.", Keywords = ""), Category = "EasyKafka|Admin")
+		void CreateAdmin(FString Servers, FString UserName, FString Password, TMap<EKafkaAdminConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Admin Client", ToolTip = "Create a kafka Admin Client. Call it once.", Keywords = ""), Category = "EasyKafka|Admin")
+		void CreateAdminStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel = EKafkaLogLevel::ERR);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Topics", ToolTip = "Create a batch of topics with given configuration.", Keywords = ""), Category = "EasyKafka|Admin")
+		FAdminRequestResult CreateTopics(const TArray<FString> Topics, int NumPartitions, int  ReplicationFactor, TMap<ETopicConfig, FString> Configuration, int Timeout = 3000);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Delete Topics", ToolTip = "Delete a batch of topics.", Keywords = ""), Category = "EasyKafka|Admin")
+		FAdminRequestResult DeleteTopics(const TArray<FString> Topics, int Timeout = 3000);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Delete Records", ToolTip = "Delete a batch of records.", Keywords = ""), Category = "EasyKafka|Admin")
+		FAdminRequestResult DeleteRecords(const TArray<FTopicPartitionOffset> TopicPartitionOffsets, int Timeout = 3000);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "List Topics", ToolTip = "List all the topics.", Keywords = ""), Category = "EasyKafka|Admin")
+		FListTopicsResult ListTopics(int Timeout = 3000);
 
 	TSharedPtr<FEasyKafkaModule> GetEasyKafka();
 private:

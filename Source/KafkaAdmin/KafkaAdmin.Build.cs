@@ -4,19 +4,19 @@ using System;
 using System.IO;
 using UnrealBuildTool;
 
-public class EasyKafka : ModuleRules
+public class KafkaAdmin : ModuleRules
 {
-	public EasyKafka(ReadOnlyTargetRules Target) : base(Target)
+	public KafkaAdmin(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp17;
+        PublicSystemIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 
-		PublicIncludePaths.AddRange(
+        PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
-				Path.Combine(PluginDirectory,"Source/KafkaConsumer/Public"),
-                Path.Combine(PluginDirectory,"Source/KafkaProducer/Public")
-            }
+				Path.Combine(PluginDirectory,"Source/KafkaAdmin/Public")
+			}
 			);
 
 
@@ -41,16 +41,10 @@ public class EasyKafka : ModuleRules
 			new string[]
 			{
 				"Engine",
-				"KafkaLib",
-				"KafkaConsumer",
-				"KafkaProducer",
-				"KafkaAdmin"
+				"KafkaLib"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
 		bEnableExceptions = true;
-
-		if(Target.Platform == UnrealTargetPlatform.HoloLens || Target.Platform == UnrealTargetPlatform.Win64)
-			bUseRTTI = true;//Avoid using RTTI on limux
-    }
+	}
 }

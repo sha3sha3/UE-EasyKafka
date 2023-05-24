@@ -3,6 +3,7 @@
 #include "EasyKafka.h"
 #include "KafkaConsumer.h"
 #include "KafkaProducer.h"
+#include "KafkaAdmin.h"
 
 
 #define LOCTEXT_NAMESPACE "FEasyKafkaModule"
@@ -22,6 +23,10 @@ void FEasyKafkaModule::StartupModule()
 	if (!KafkaProducer) {
 		FModuleManager::LoadModuleChecked<FKafkaProducerModule>("KafkaProducer");
 		KafkaProducer = MakeShared <FKafkaProducerModule>(FKafkaProducerModule::Get());
+	}
+	if (!KafkaAdmin) {
+		FModuleManager::LoadModuleChecked<FKafkaAdminModule>("KafkaAdmin");
+		KafkaAdmin = MakeShared <FKafkaAdminModule>(FKafkaAdminModule::Get());
 	}
 }
 

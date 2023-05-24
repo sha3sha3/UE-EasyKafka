@@ -5,6 +5,7 @@
 #include "Modules/ModuleManager.h"
 #include "KafkaConsumer.h"
 #include "KafkaProducer.h"
+#include "KafkaAdmin.h"
 
 class EASYKAFKA_API FEasyKafkaModule : public IModuleInterface
 {
@@ -33,6 +34,15 @@ public:
 	}
 
 	/**
+	* Get Kafka Admin singleton.
+	*
+	* @return TSharedPtr<FKafkaAdminModule> singleton
+	*/
+	FORCEINLINE TSharedPtr<FKafkaAdminModule> GetAdmin() const {
+		return KafkaAdmin;
+	}
+
+	/**
 	* Get Easy kafka singleton.
 	*
 	* @return FEasyKafkaModule ref.
@@ -41,5 +51,6 @@ public:
 private:
 	TSharedPtr<FKafkaConsumerModule> KafkaConsumer = nullptr;
 	TSharedPtr<FKafkaProducerModule> KafkaProducer = nullptr;
+	TSharedPtr<FKafkaAdminModule> KafkaAdmin = nullptr;
 	static FEasyKafkaModule* EasyKafka;
 };

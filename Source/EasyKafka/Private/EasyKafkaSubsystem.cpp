@@ -2,6 +2,7 @@
 
 #include "EasyKafkaSubsystem.h"
 #include "KafkaConsumer.h"
+#include "KafkaAdmin.h"
 #include "../../KafkaProducer/Public/KafkaProducer.h"
 
 
@@ -158,6 +159,56 @@ void UEasyKafkaSubsystem::PurgeMessages()
 {
 	if (EasyKafka->GetProducer())
 		EasyKafka->GetProducer()->Purge();
+}
+
+void UEasyKafkaSubsystem::CreateAdminDefault(FString Servers, FString UserName, FString Password, EKafkaLogLevel KafkaLogLevel)
+{
+	if (EasyKafka->GetAdmin())
+		EasyKafka->GetAdmin()->CreateAdmin(Servers, UserName, Password, TMap<FString, FString>(), (int)KafkaLogLevel);
+}
+
+void UEasyKafkaSubsystem::CreateAdmin(FString Servers, FString UserName, FString Password, TMap<EKafkaAdminConfig, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
+{
+	if (EasyKafka->GetAdmin())
+		EasyKafka->GetAdmin()->CreateAdmin(Servers, UserName, Password, Configuration, (int)KafkaLogLevel);
+}
+
+void UEasyKafkaSubsystem::CreateAdminStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
+{
+	if (EasyKafka->GetAdmin())
+		EasyKafka->GetAdmin()->CreateAdmin(Servers, UserName, Password, Configuration, (int)KafkaLogLevel);
+}
+
+FAdminRequestResult UEasyKafkaSubsystem::CreateTopics(const TArray<FString> Topics, int NumPartitions, int ReplicationFactor, TMap<ETopicConfig, FString> Configuration, int Timeout)
+{
+	if (EasyKafka->GetAdmin())
+		return EasyKafka->GetAdmin()->CreateTopics(Topics, NumPartitions, ReplicationFactor, Configuration, Timeout);
+	else
+		return FAdminRequestResult("Admin client not initialized", true);
+}
+
+FAdminRequestResult UEasyKafkaSubsystem::DeleteTopics(const TArray<FString> Topics, int Timeout)
+{
+	if (EasyKafka->GetAdmin())
+		return EasyKafka->GetAdmin()->DeleteTopics(Topics, Timeout);
+	else
+		return FAdminRequestResult("Admin client not initialized", true);
+}
+
+FAdminRequestResult UEasyKafkaSubsystem::DeleteRecords(const TArray<FTopicPartitionOffset> TopicPartitionOffsets, int Timeout)
+{
+	if (EasyKafka->GetAdmin())
+		return EasyKafka->GetAdmin()->DeleteRecords(TopicPartitionOffsets, Timeout);
+	else
+		return FAdminRequestResult("Admin client not initialized", true);
+}
+
+FListTopicsResult UEasyKafkaSubsystem::ListTopics(int Timeout)
+{
+	if (EasyKafka->GetAdmin())
+		return EasyKafka->GetAdmin()->ListTopics(Timeout);
+	else
+		return FListTopicsResult("Admin client not initialized", true);
 }
 
 void UEasyKafkaSubsystem::FlushProducer()
