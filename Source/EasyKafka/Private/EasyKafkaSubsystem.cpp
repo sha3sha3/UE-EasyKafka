@@ -29,7 +29,7 @@ void UEasyKafkaSubsystem::CreateConsumer(FString Servers, FString UserName, FStr
 void UEasyKafkaSubsystem::CreateConsumerStr(FString Servers, FString UserName, FString Password, TMap<FString, FString> Configuration, EKafkaLogLevel KafkaLogLevel)
 {
 	if(EasyKafka->GetConsumer())
-	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration, (int)KafkaLogLevel);
+	EasyKafka->GetConsumer()->CreateConsumer(Servers, UserName, Password, Configuration, KafkaLogLevel);
 }
 
 void UEasyKafkaSubsystem::Subscribe(TArray<FString> Topics, int Timeout)

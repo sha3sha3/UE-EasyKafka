@@ -46,7 +46,7 @@ Create Consumer with default configuration:
 #include "EasyKafkaSubsystem.h"
 
 TSharedPtr<FEasyKafkaModule> EasyKafka = GEngine->GetEngineSubsystem<UEasyKafkaSubsystem>()->GetEasyKafka();
-EasyKafka->GetConsumer()->CreateConsumer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`);
+EasyKafka->GetConsumer()->CreateConsumer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, (int)EKafkaLogLevel::ERR);
 ```
 
 Create Consumer with configuration:
@@ -61,7 +61,7 @@ TMap<EKafkaConsumerConfig, FString> KafkaConfiguration =
 	{EKafkaConsumerConfig::CLIENT_ID,"34235"},
 	{EKafkaConsumerConfig::SOCKET_TIMEOUT_MS,"10000"}
 };
-EasyKafka->GetConsumer()->CreateConsumer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration);
+EasyKafka->GetConsumer()->CreateConsumer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration, (int)EKafkaLogLevel::ERR);
 ```
 
 Consume messages:
@@ -101,7 +101,7 @@ Create Producer with default configuration:
 #include "EasyKafkaSubsystem.h"
 
 TSharedPtr<FEasyKafkaModule> EasyKafka = GEngine->GetEngineSubsystem<UEasyKafkaSubsystem>()->GetEasyKafka();
-EasyKafka->GetProducer()->CreateProducer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`);
+EasyKafka->GetProducer()->CreateProducer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, (int)EKafkaLogLevel::ERR);
 ```
 
 Create Producer with configuration:
@@ -116,7 +116,7 @@ TMap<EKafkaProducerConfig, FString> KafkaConfiguration =
 	{EKafkaProducerConfig::MESSAGE_TIMEOUT_MS,"5000"},
 	{EKafkaProducerConfig::REQUEST_TIMEOUT_MS,"5000"}
 };
-EasyKafka->GetProducer()->CreateProducer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration);
+EasyKafka->GetProducer()->CreateProducer(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration, (int)EKafkaLogLevel::ERR);
 ```
 
 on record produced/failed to produce callback
