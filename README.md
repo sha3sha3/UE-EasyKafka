@@ -31,7 +31,8 @@ bUseRTTI = true;
     "EasyKafka",
     "KafkaLib",
     "KafkaConsumer",
-    "KafkaProducer"
+    "KafkaProducer",
+	"KafkaAdmin"
 });
 ```
 
