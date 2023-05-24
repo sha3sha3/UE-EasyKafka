@@ -87,7 +87,7 @@ EasyKafka->GetConsumer()->Subscribe(
 
 EasyKafka->GetConsumer()->StartConsuming();
 ```
-**ATTENTION: MAKE SURE TO COMMIT FROM COSUMER RUNNABLE THREAD BEFORE PROCESSING RECORDS IF USE DISABLED AUTOCOMMIT.**
+**ATTENTION: MAKE SURE TO COMMIT FROM THE CONSUMER RUNNABLE THREAD BEFORE PROCESSING RECORDS IF YOU DISABLED AUTOCOMMIT.**
 
 ## Blueprint
 
@@ -189,6 +189,17 @@ TMap<EKafkaAdminConfig, FString> KafkaConfiguration =
 	{EKafkaAdminConfig::SOCKET_TIMEOUT_MS,"10000"}
 };
 EasyKafka->GetAdmin()->CreateAdmin(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration, (int)EKafkaLogLevel::ERR);
+```
+Simple Admin request example:
+
+```cpp
+const TArray<FString> TopicsToDelete = { "Topic1Name", "Topic2Name" };
+FAdminRequestResult Result = EasyKafka->GetAdmin()->DeleteTopics(TopicsToDelete);
+
+if (Result.bError)
+{
+	UE_LOG(LogTemp, Error, TEXT("Error deleting topics:  %s\n"), *Result.ErrorMessage);
+}
 ```
 ## Blueprint
 
