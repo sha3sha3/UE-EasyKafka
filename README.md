@@ -15,6 +15,7 @@ EasyKafka is a Kafka/Redpanda client sub-system for unreal engine. It supports p
 # Supported Platforms
 
  - Windows x86_64
+ - Hololens 2 (Windows ARM64)
  - Linux x86_64
  - Linux ARM64
 
@@ -24,7 +25,8 @@ Link the plugin modules to your project through `<YourModule>.build.cs`:
 
 ```cs
 CppStandard = CppStandardVersion.Cpp17;//avoid using boost
-bUseRTTI = true;
+if(Target.Platform == UnrealTargetPlatform.HoloLens || Target.Platform == UnrealTargetPlatform.Win64)
+	bUseRTTI = true;
 
  PrivateDependencyModuleNames.AddRange( new string[]
 {
