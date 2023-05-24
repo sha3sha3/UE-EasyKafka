@@ -65,6 +65,23 @@
 				"LinuxAArch64",
 				"HoloLens"
 			]
+		},
+		{
+			"Name": "KafkaAdmin",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux",
+				"LinuxArm64",
+				"HoloLens"
+			],
+			"WhitelistPlatforms": [
+				"Win64",
+				"Linux",
+				"LinuxAArch64",
+				"HoloLens"
+			]
 		}
 	],
 	"Plugins": [
