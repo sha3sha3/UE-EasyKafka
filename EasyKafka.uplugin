@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0",
+	"VersionName": "2023.05.24",
 	"FriendlyName": "EasyKafka",
 	"Description": "EasyKafka is a kafka client sub-system that supports Kafka & Red Panda message brokers.",
 	"Category": "Other",
