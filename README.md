@@ -32,7 +32,7 @@ bUseRTTI = true;
     "KafkaLib",
     "KafkaConsumer",
     "KafkaProducer",
-	"KafkaAdmin"
+    "KafkaAdmin"
 });
 ```
 
@@ -162,6 +162,35 @@ EasyKafka->GetProducer()->ProduceRecord(record);
 ## Blueprint
 
 <img src="Images/ProducerBP.png" alt="ProducerBP">
+
+# Kafka Admin Basic Usage
+
+**ALL THE METHODS ARE BLOCKING, ASYNC TO BE ADDED.**
+## C++
+Create Admin with default configuration:
+
+```cpp
+#include "EasyKafkaSubsystem.h"
+
+TSharedPtr<FEasyKafkaModule> EasyKafka = GEngine->GetEngineSubsystem<UEasyKafkaSubsystem>()->GetEasyKafka();
+EasyKafka->GetAdmin()->CreateAdmin(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, (int)EKafkaLogLevel::ERR);
+```
+Create Admin with configuration:
+
+```cpp
+#include "EasyKafkaSubsystem.h"
+
+TSharedPtr<FEasyKafkaModule> EasyKafka = GEngine->GetEngineSubsystem<UEasyKafkaSubsystem>()->GetEasyKafka();
+
+TMap<EKafkaAdminConfig, FString> KafkaConfiguration =
+{
+	{EKafkaAdminConfig::SOCKET_TIMEOUT_MS,"10000"}
+};
+EasyKafka->GetAdmin()->CreateAdmin(`<BOOTSTRAP_SERVERS_COMMA_SEPARATED>`, `<USERNAME>`, `<TOKEN/PASSWORD>`, KafkaConfiguration, (int)EKafkaLogLevel::ERR);
+```
+## Blueprint
+
+<img src="Images/AdminBP.png" alt="ProducerBP">
 
 ## Find it helpful?
 
