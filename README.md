@@ -208,7 +208,7 @@ if (Result.bError)
 ## Find it helpful?
 
 Give us a ⭐️!
-
+<!---
 # License
 
 Licensed under BSD 2-Clause [License](LICENSE.txt).
@@ -216,3 +216,4 @@ Licensed under BSD 2-Clause [License](LICENSE.txt).
 ```
 Copyright (c) 2022-2023 MrShaaban, Mohamad Shaaban.
 ```
+-->
