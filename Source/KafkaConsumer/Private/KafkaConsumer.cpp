@@ -56,9 +56,9 @@ uint32 FKafkaConsumerModule::Run()
 				*/
 			}
 			else {
-				auto error = UTF8_TO_TCHAR(record.toString().c_str());
-				ErrorEvent.Broadcast(error);
-				UE_LOG(LogKafkaConsumer, Error, TEXT("%s"),error);
+				FString ErrorStr = UTF8_TO_TCHAR(record.toString().c_str());
+				ErrorEvent.Broadcast(ErrorStr);
+				UE_LOG(LogKafkaConsumer, Error, TEXT("%s"), *ErrorStr);
 				continue;
 			}
 		}
