@@ -1,5 +1,3 @@
-# This project is no longer maintained for some platforms on GitHub, but you may obtain the latest maintained version on [Unreal Marketplace](https://www.unrealengine.com/marketplace/en-US/product/client-for-kafka). 
-
 <h1 align="center">
   <br>
   <a href="https://discord.com/invite/MtGpAdM">
